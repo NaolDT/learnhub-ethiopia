@@ -45,6 +45,10 @@ export default function errorHandler(err, req, res, next) {
         : "Something went wrong. Please try again later.",
   };
 
+  if (isOperational && error.details) {
+    response.errors = error.details;
+  }
+
   if (!env.isProduction) {
     response.stack = err.stack;
   }

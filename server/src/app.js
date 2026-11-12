@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
 import env from "./config/env.js";
 import routes from "./routes/index.js";
 import notFound from "./middlewares/notFound.js";
@@ -17,6 +18,8 @@ app.use(morgan(env.isProduction ? "combined" : "dev"));
 
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
 
 app.use("/api", routes);
 
